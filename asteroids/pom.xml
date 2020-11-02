@@ -1,0 +1,147 @@
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                        http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>
+        4.0.0
+    </modelVersion>
+
+	<!-- Project settings -->
+	<groupId>    aoop  </groupId>
+	<artifactId> asteroids  </artifactId>
+	<version>    1.0        </version>
+    <name>       asteroids  </name>
+	
+    <packaging>  jar                    </packaging>
+    <properties>
+        <project.build.sourceEncoding>  UTF-8   </project.build.sourceEncoding>
+        <maven.compiler.source>         1.8     </maven.compiler.source>
+        <maven.compiler.target>         1.8     </maven.compiler.target>
+    </properties>
+	
+	<build>
+		<plugins>
+			<plugin>
+                <groupId>       org.apache.maven.plugins    </groupId>
+                <artifactId>    maven-compiler-plugin       </artifactId>
+                <version>       3.6.1                       </version>
+                <configuration>
+                    <source>    ${maven.compiler.source}        </source>
+                    <target>    ${maven.compiler.target}        </target>
+                    <encoding>  ${project.build.sourceEncoding} </encoding>
+                    <!-- If you need compiler flags, add them here -->
+                    <compilerArgs>
+                        <arg>   -Xlint:unchecked    </arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+
+			<plugin>
+				<!-- Executable JAR configuration. -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>aoop.asteroids.Asteroids</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<!-- Javadoc configuration. -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.4</version>
+				<configuration>
+					<show>private</show>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>aoop.asteroids.Asteroids</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			
+            <!-- Generates code coverage report on build target execution
+            <plugin>
+				<groupId>       org.jacoco          </groupId>
+				<artifactId>    jacoco-maven-plugin </artifactId>
+				<version>       0.7.9               </version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>  prepare-agent   </goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>    report  </id>
+						<phase> test    </phase>
+						<goals>
+							<goal>  report  </goal>
+						</goals>
+					</execution>
+				</executions>
+            </plugin>
+            Commented out because it takes a long time to build and is no
+            longer required-->
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>objectdb</id>
+			<name>ObjectDB Repository</name>
+			<url>http://m2.objectdb.com</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.objectdb</groupId>
+			<artifactId>objectdb</artifactId>
+			<version>2.6.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>javax.persistence</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta</artifactId>
+			<version>1.1</version>
+		</dependency>
+		
+        <!-- JUnit unit testing framework -->
+        <dependency>
+            <groupId>    junit          </groupId>
+            <artifactId> junit          </artifactId>
+            <version>    4.12           </version>
+            <scope>      test           </scope>
+        </dependency>
+	</dependencies>
+
+</project>
